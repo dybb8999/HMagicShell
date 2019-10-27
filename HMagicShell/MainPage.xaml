@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="HMagicShell.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HMagicShell"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Enabled">
+
+    <NavigationView Name="navigationView" Loaded="NavigationView_Loaded" SelectionFollowsFocus="Enabled" IsBackButtonVisible="Collapsed" SelectionChanged="navigationView_SelectionChanged" ItemInvoked="navigationView_ItemInvoked">
+        <NavigationView.MenuItems>
+            <NavigationViewItem Icon="Home" Content="主页" Tag="ShellList"/>
+            <NavigationViewItem Icon="SwitchApps" Content="控制台" Tag="Controller"/>
+            <NavigationViewItem Icon="Page2" Content="关于" Tag="About"/>
+        </NavigationView.MenuItems>
+        <Frame Name="contentFrame" Navigated="contentFrame_Navigated"/>
+    </NavigationView>
+</Page>
