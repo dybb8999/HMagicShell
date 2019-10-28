@@ -7,18 +7,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid>
+    <Page.Resources>
+        <DataTemplate x:Key="FolderTreeTemplete">
+            <TreeViewItem AutomationProperties.Name="{Binding Path}"
+                ItemsSource="{Binding SubFolder}" IsExpanded="True">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Source="../Assets/folder.png"/>
+                    <TextBlock Margin="0,0,10,0"/>
+                    <TextBlock Text="{Binding Path}" />
+                </StackPanel>
+            </TreeViewItem>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Name="mainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <TreeView Grid.Column="0">
-            <TreeView.ItemTemplate>
-                
-            </TreeView.ItemTemplate>
-        </TreeView>
-        <ListView Grid.Column="1">
+        <TreeView Name="folderTreeView" Grid.Column="0" ItemsSource="{Binding FolderData}" ItemTemplate="{StaticResource FolderTreeTemplete}"/>
+
+
+        <ListView Name="fileListView" Grid.Column="1">
             
         </ListView>
     </Grid>

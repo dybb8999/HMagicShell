@@ -22,9 +22,21 @@ namespace HMagicShell.Plugins
     /// </summary>
     public sealed partial class FileManagerPage : Page
     {
+        private ModeView.FileManagerPageModeView m_pModeview = new ModeView.FileManagerPageModeView();
         public FileManagerPage()
         {
             this.InitializeComponent();
+
+            mainGrid.DataContext = m_pModeview;
+
+            var tmp = new ModeView.FolderTreeViewItem("C");
+            tmp.SubFolder.Add(new ModeView.FolderTreeViewItem("asdsa"));
+            tmp.SubFolder.Add(new ModeView.FolderTreeViewItem("123123"));
+            tmp.SubFolder.Add(new ModeView.FolderTreeViewItem("asdf123"));
+
+            m_pModeview.FolderData.Add(tmp);
+            m_pModeview.FolderData.Add(new ModeView.FolderTreeViewItem("D"));
+            m_pModeview.FolderData.Add(new ModeView.FolderTreeViewItem("E"));
         }
     }
 }

@@ -10,6 +10,4 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <muxc:TabView Name="tabView" IsAddTabButtonVisible="False" CanDragTabs="True"/>
-
-
 </Page>

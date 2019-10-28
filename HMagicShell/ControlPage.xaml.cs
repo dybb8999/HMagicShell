@@ -72,11 +72,8 @@ namespace HMagicShell
             newItem.IconSource = new Microsoft.UI.Xaml.Controls.SymbolIconSource() { Symbol = Symbol.Document };
 
             // The content of the tab is often a frame that contains a page, though it could be any UIElement.
-            //Frame frame = new Frame();
 
-
-            //newItem.Content = frame;
-
+            newItem.Content = new Plugins.FileManagerPage();
             return newItem;
         }
     }
