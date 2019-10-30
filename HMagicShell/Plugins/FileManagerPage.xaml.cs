@@ -58,11 +58,6 @@ namespace HMagicShell.Plugins
             m_pModeview.FileData.Add(new ModeView.FileInfoItem());
         }
 
-        private void ListViewHeaderKeyUp(object sender, KeyRoutedEventArgs e)
-        {
-
-        }
-
         private void ListViewHeaderReleased(object sender, PointerRoutedEventArgs e)
         {
 

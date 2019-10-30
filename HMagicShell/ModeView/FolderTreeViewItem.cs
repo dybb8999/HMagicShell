@@ -33,7 +33,7 @@ namespace HMagicShell.ModeView
             set
             {
                 m_collectionSubFolder = value;
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SubFolder"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SubFolder)));
             }
         }
 
@@ -44,7 +44,7 @@ namespace HMagicShell.ModeView
             set
             {
                 m_strPath = value;
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Path"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Path)));
             }
         }
     }

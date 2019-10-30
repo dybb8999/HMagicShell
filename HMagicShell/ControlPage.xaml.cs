@@ -43,7 +43,7 @@ namespace HMagicShell
             }
             
             //检查是否传递参数
-            if(e.Parameter == null)
+            if(e?.Parameter == null)
             {
                 return;
             }

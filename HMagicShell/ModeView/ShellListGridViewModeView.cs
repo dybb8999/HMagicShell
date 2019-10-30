@@ -25,12 +25,6 @@ namespace HMagicShell.ModeView
             m_strShellAddress = address;
             m_dateCreateTime = dateTime;
         }
-
-        ~ShellListGridViewModeView()
-        {
-
-        }
-
         public string ShellAddress
         {
             get => m_strShellAddress;
@@ -38,7 +32,7 @@ namespace HMagicShell.ModeView
             set
             {
                 m_strShellAddress = value;
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ShellAddress"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShellAddress)));
             }
         }
 
@@ -49,7 +43,7 @@ namespace HMagicShell.ModeView
             set
             {
                 m_dateCreateTime = value;
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CreateTime"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CreateTime)));
             }
         }
 
@@ -60,7 +54,7 @@ namespace HMagicShell.ModeView
             set
             {
                 m_strPassWord = value;
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PassWord"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PassWord)));
             }
         }
     }

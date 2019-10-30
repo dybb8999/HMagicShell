@@ -50,7 +50,7 @@ namespace HMagicShell
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                if (e?.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: 从之前挂起的应用程序加载状态
                 }
@@ -59,7 +59,7 @@ namespace HMagicShell
                 Window.Current.Content = rootFrame;
             }
 
-            if (e.PrelaunchActivated == false)
+            if (e?.PrelaunchActivated == false)
             {
                 if (rootFrame.Content == null)
                 {
