@@ -8,7 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
                 <ResourceDictionary Source="/Template/ShellListPageGridViewTemplete.xaml"/>
-                
+                <ResourceDictionary Source="/Style/FileManagerPageListViewItemStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!--没有这个，注意的导航栏会没有亚克力效果-->
