@@ -24,11 +24,47 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <TreeView Name="folderTreeView" Grid.Column="0" ItemsSource="{Binding FolderData}" ItemTemplate="{StaticResource FolderTreeTemplete}"/>
+        <TreeView Name="folderTreeView" VerticalAlignment="Stretch" Grid.Column="0" ItemsSource="{Binding FolderData}" ItemTemplate="{StaticResource FolderTreeTemplete}"/>
 
-
-        <ListView Name="fileListView" Grid.Column="1">
-            
+        <ListView Name="fileListView" VerticalAlignment="Stretch" Grid.Column="1" ItemsSource="{Binding FileData}">
+            <ListView.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <!--文件名-->
+                        <ColumnDefinition Width="500"/>
+                        <!--修改日期-->
+                        <ColumnDefinition Width="200"/>
+                        <!--文件类型-->
+                        <ColumnDefinition Width="100"/>
+                        <!--大小-->
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="文件名" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"/>
+                    <TextBlock Text="修改日期" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                    <TextBlock Text="类型" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"/>
+                    <TextBlock Text="大小" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="3"/>
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <!--文件名-->
+                            <ColumnDefinition Width="500"/>
+                            <!--修改日期-->
+                            <ColumnDefinition Width="200"/>
+                            <!--文件类型-->
+                            <ColumnDefinition Width="100"/>
+                            <!--大小-->
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"/>
+                        <TextBlock Text="{Binding LastChangeTime}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                        <TextBlock Text="{Binding Type}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"/>
+                        <TextBlock Text="{Binding Size}" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="3"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </Page>

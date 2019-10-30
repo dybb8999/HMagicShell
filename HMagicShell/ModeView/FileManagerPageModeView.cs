@@ -13,14 +13,24 @@ namespace HMagicShell.ModeView
         public event PropertyChangedEventHandler PropertyChanged;
 
         private ObservableCollection<FolderTreeViewItem> m_pFolderCollect = new ObservableCollection<FolderTreeViewItem>();
-
+        private ObservableCollection<FileInfoItem> m_pFileCollect = new ObservableCollection<FileInfoItem>();
         public ObservableCollection<FolderTreeViewItem> FolderData
         {
             get => m_pFolderCollect;
             set
             {
                 m_pFolderCollect = value;
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FolderData"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FolderData)));
+            }
+        }
+
+        public ObservableCollection<FileInfoItem> FileData
+        {
+            get => m_pFileCollect;
+            set
+            {
+                m_pFileCollect = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FileData)));
             }
         }
     }

@@ -37,6 +37,25 @@ namespace HMagicShell.Plugins
             m_pModeview.FolderData.Add(tmp);
             m_pModeview.FolderData.Add(new ModeView.FolderTreeViewItem("D"));
             m_pModeview.FolderData.Add(new ModeView.FolderTreeViewItem("E"));
+
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
+            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
         }
     }
 }
