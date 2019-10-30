@@ -41,10 +41,10 @@
                             <!--大小-->
                             <ColumnDefinition x:Name="fileSizeGrid" Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="文件名" Tag="FileName" VerticalAlignment="Center" Grid.Column="0" Margin="12,0,0,0" KeyUp="ListViewHeaderKeyUp"/>
-                        <TextBlock Text="修改日期" Tag="ModifyDate" VerticalAlignment="Center" Grid.Column="1" Margin="12,0,0,0" KeyUp="ListViewHeaderKeyUp"/>
-                        <TextBlock Text="类型" Tag="Type" VerticalAlignment="Center" Grid.Column="2" Margin="12,0,0,0" KeyUp="ListViewHeaderKeyUp"/>
-                        <TextBlock Text="大小" Tag="Size" VerticalAlignment="Center" Grid.Column="3" Margin="12,0,0,0" KeyUp="ListViewHeaderKeyUp"/>
+                        <TextBlock Text="文件名" Tag="FileName" VerticalAlignment="Center" Grid.Column="0" Margin="12,0,0,0" PointerReleased="ListViewHeaderReleased"/>
+                        <TextBlock Text="修改日期" Tag="ModifyDate" VerticalAlignment="Center" Grid.Column="1" Margin="12,0,0,0" PointerReleased="ListViewHeaderReleased"/>
+                        <TextBlock Text="类型" Tag="Type" VerticalAlignment="Center" Grid.Column="2" Margin="12,0,0,0" PointerReleased="ListViewHeaderReleased"/>
+                        <TextBlock Text="大小" Tag="Size" VerticalAlignment="Center" Grid.Column="3" Margin="12,0,0,0" PointerReleased="ListViewHeaderReleased"/>
                     </Grid>
                 </controls:ScrollHeader>
             </ListView.Header>

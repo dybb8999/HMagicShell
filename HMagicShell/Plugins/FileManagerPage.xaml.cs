@@ -62,5 +62,10 @@ namespace HMagicShell.Plugins
         {
 
         }
+
+        private void ListViewHeaderReleased(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
     }
 }
