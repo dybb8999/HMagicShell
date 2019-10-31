@@ -25,6 +25,8 @@ namespace HMagicShell
         public MainPage()
         {
             this.InitializeComponent();
+            //初始化数据库
+            DataBaseManager.QueryAllWebShell();
         }
 
         private void NavigationView_Loaded(object sender, RoutedEventArgs e)
