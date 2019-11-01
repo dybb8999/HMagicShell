@@ -7,6 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <GridView Name="shellList" Margin="5" SelectionMode="Single" IsItemClickEnabled="True" ItemTemplate="{StaticResource ShellListItemDataTemplate}" ItemClick="shellList_ItemClick"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <CommandBar IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0">
+            <AppBarButton Icon="Add" Label="添加" Click="OnAddWebShell" />
+        </CommandBar>
+        
+        <GridView Name="shellList" Margin="5" Grid.Row="1" SelectionMode="Single" IsItemClickEnabled="True" ItemTemplate="{StaticResource ShellListItemDataTemplate}" ItemClick="shellList_ItemClick"/>
+    </Grid>
 </Page>

@@ -18,10 +18,10 @@
             <!--菜单-->
             <Border.ContextFlyout>
                 <MenuFlyout>
-                    <MenuFlyoutItem Text="By rating" Click="MenuFlyoutItem_Click" Tag="rating"/>
-                    <MenuFlyoutItem Text="By match" Click="MenuFlyoutItem_Click" Tag="match"/>
-                    <MenuFlyoutItem Text="By distance" Click="MenuFlyoutItem_Click" Tag="distance"/>
-
+                    <MenuFlyoutItem Text="文件管理" Click="MenuFlyoutItem_Click" Tag="FileManager"/>
+                    <MenuFlyoutItem Text="远程命令" Click="MenuFlyoutItem_Click" Tag="RemoteShell"/>
+                    <MenuFlyoutSeparator/>
+                    <MenuFlyoutItem Text="删除" Click="MenuFlyoutItem_Click" Tag="Delete"/>
                 </MenuFlyout>
             </Border.ContextFlyout>
         </Border>

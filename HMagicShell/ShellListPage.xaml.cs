@@ -61,5 +61,11 @@ namespace HMagicShell
             var clickItem = e.ClickedItem as ModeView.ShellListGridViewModeView;
             this.Frame.Navigate(typeof(ControlPage), "asdfasf", new DrillInNavigationTransitionInfo());
         }
+
+        private async void OnAddWebShell(object sender, RoutedEventArgs e)
+        {
+            AddWebShellDialog dlg = new AddWebShellDialog();
+            var result = await dlg.ShowAsync();
+        }
     }
 }
