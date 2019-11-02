@@ -20,10 +20,10 @@ namespace HMagicShell.ModeView
 
         }
 
-        public ShellListGridViewModeView(string address, DateTime dateTime)
+        public ShellListGridViewModeView(string address, Int64 dateTime)
         {
             m_strShellAddress = address;
-            m_dateCreateTime = dateTime;
+            m_dateCreateTime = DateTime.FromFileTimeUtc(dateTime).ToLocalTime();
         }
         public string ShellAddress
         {

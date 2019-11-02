@@ -21,6 +21,7 @@
                     <MenuFlyoutItem Text="文件管理" Click="MenuFlyoutItem_Click" Tag="FileManager"/>
                     <MenuFlyoutItem Text="远程命令" Click="MenuFlyoutItem_Click" Tag="RemoteShell"/>
                     <MenuFlyoutSeparator/>
+                    <MenuFlyoutItem Text="编辑" Click="MenuFlyoutItem_Click" Tag="Modify"/>
                     <MenuFlyoutItem Text="删除" Click="MenuFlyoutItem_Click" Tag="Delete"/>
                 </MenuFlyout>
             </Border.ContextFlyout>

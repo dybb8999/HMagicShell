@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -28,31 +29,7 @@ namespace HMagicShell
         public ShellListPage()
         {
             this.InitializeComponent();
-
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
-            m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView("http://127.0.0.1/tesp.php", DateTime.Now));
+            RefreshWenShell();
             shellList.ItemsSource = m_pShellListModeView;
         }
 
@@ -64,8 +41,31 @@ namespace HMagicShell
 
         private async void OnAddWebShell(object sender, RoutedEventArgs e)
         {
-            AddWebShellDialog dlg = new AddWebShellDialog();
+            WebShellConfigDialog dlg = new WebShellConfigDialog();
             var result = await dlg.ShowAsync();
+            if(result == ContentDialogResult.Primary)
+            {
+                //确定
+                var webShellInfo = dlg.GetWebShellConfig();
+                await DataBaseManager.AddWebShellAsync(webShellInfo);
+                RefreshWenShell();
+            }
+        }
+
+        private async void RefreshWenShell()
+        {
+            m_pShellListModeView.Clear();
+            //获取所有webshell
+            var webshellList = await DataBaseManager.QueryAllWebShell();
+            foreach (var item in webshellList)
+            {
+                m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView(item.Url, item.CreateTime));
+            }
+        }
+
+        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Menu Click!");
         }
     }
 }

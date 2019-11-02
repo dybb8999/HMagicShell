@@ -119,8 +119,9 @@
     <Compile Include="AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddWebShellDialog.xaml.cs">
-      <DependentUpon>AddWebShellDialog.xaml</DependentUpon>
+    <Compile Include="ModeView\WebShellConfigModeView.cs" />
+    <Compile Include="WebShellConfigDialog.xaml.cs">
+      <DependentUpon>WebShellConfigDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -147,6 +148,7 @@
     <Compile Include="ShellListPage.xaml.cs">
       <DependentUpon>ShellListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValueConvert\WebShellConfigTypeValueConvert.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -173,7 +175,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddWebShellDialog.xaml">
+    <Page Include="WebShellConfigDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,30 +6,38 @@ using System.Threading.Tasks;
 
 namespace HMagicShell
 {
-    enum WebShellType : uint
+    public enum WebShellType : uint
     {
         PHP5,
         PHP7,
-        ASPX
+        ASPX,
+        ASP
     }
 
-    class CWebShellInfo
+    public class CWebShellInfo
     {
         private string m_strUrl;
         private string m_strPassword;
         private string m_strRemark;
         private Guid m_guid;
         private WebShellType m_uType;
-        private Encoding m_encoding;
+        private string m_strEncoding;
+        private Int64 m_i64CreateTime;
 
-        public CWebShellInfo(string strUrl, string strPassword, string strRemark, Guid guid, WebShellType type, Encoding encoding)
+        public CWebShellInfo()
+        {
+
+        }
+
+        public CWebShellInfo(string strUrl, string strPassword, string strRemark, Guid guid, WebShellType type, string encoding, Int64 CreateTime = 0)
         {
             m_strUrl = strUrl;
             m_strPassword = strPassword;
             m_strRemark = strRemark;
             m_guid = guid;
             m_uType = type;
-            m_encoding = encoding;
+            m_strEncoding = encoding;
+            m_i64CreateTime = CreateTime;
         }
 
         public string Url
@@ -62,11 +70,16 @@ namespace HMagicShell
             set => m_uType = value;
         }
 
-        public Encoding Encoding
+        public string Encoding
         {
-            get => m_encoding;
-            set => m_encoding = value;
+            get => m_strEncoding;
+            set => m_strEncoding = value;
         }
 
+        public Int64 CreateTime
+        {
+            get => m_i64CreateTime;
+            set => m_i64CreateTime = value;
+        }
     }
 }
