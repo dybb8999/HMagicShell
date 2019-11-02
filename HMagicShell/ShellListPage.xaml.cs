@@ -29,7 +29,7 @@ namespace HMagicShell
         public ShellListPage()
         {
             this.InitializeComponent();
-            RefreshWenShell();
+            RefreshWebShell();
             shellList.ItemsSource = m_pShellListModeView;
         }
 
@@ -48,11 +48,11 @@ namespace HMagicShell
                 //确定
                 var webShellInfo = dlg.GetWebShellConfig();
                 await DataBaseManager.AddWebShellAsync(webShellInfo);
-                RefreshWenShell();
+                RefreshWebShell();
             }
         }
 
-        private async void RefreshWenShell()
+        private async void RefreshWebShell()
         {
             m_pShellListModeView.Clear();
             //获取所有webshell
