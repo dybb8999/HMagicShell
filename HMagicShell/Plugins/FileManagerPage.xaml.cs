@@ -22,43 +22,33 @@ namespace HMagicShell.Plugins
     /// </summary>
     public sealed partial class FileManagerPage : Page
     {
+        //保存WebShell配置信息
+        private CWebShellInfo m_pWebShellInfo;
+        //拿到PHP5 PHP7 or Ajax处理操作
+
+        //处理编码信息
+        
+
         private ModeView.FileManagerPageModeView m_pModeview = new ModeView.FileManagerPageModeView();
         public FileManagerPage()
         {
             this.InitializeComponent();
 
             mainGrid.DataContext = m_pModeview;
-
-            var tmp = new ModeView.FolderTreeViewItem("C");
-            tmp.SubFolder.Add(new ModeView.FolderTreeViewItem("asdsa"));
-            tmp.SubFolder.Add(new ModeView.FolderTreeViewItem("123123"));
-            tmp.SubFolder.Add(new ModeView.FolderTreeViewItem("asdf123"));
-
-            m_pModeview.FolderData.Add(tmp);
-            m_pModeview.FolderData.Add(new ModeView.FolderTreeViewItem("D"));
-            m_pModeview.FolderData.Add(new ModeView.FolderTreeViewItem("E"));
-
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
-            m_pModeview.FileData.Add(new ModeView.FileInfoItem());
         }
 
         private void ListViewHeaderReleased(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+
+            base.OnNavigatedTo(e);
+        }
+
+        private void QueryVolumes()
         {
 
         }
