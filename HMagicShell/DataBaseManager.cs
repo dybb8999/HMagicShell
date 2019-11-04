@@ -119,5 +119,33 @@ namespace HMagicShell
                 sqliteCommand?.Dispose();
             }
         }
+
+        public static async Task DeleteWebShellAsync(Guid guid)
+        {
+            SqliteConnection sqliteConnection = null;
+            SqliteCommand sqliteCommand = null;
+            string strDatabasePath = ApplicationData.Current.LocalFolder.Path + "\\" + m_DatabasePath + "\\" + m_DatabaseFile;
+
+            try
+            {
+                sqliteConnection = new SqliteConnection(string.Format("Filename={0}", strDatabasePath));
+                sqliteConnection.Open();
+
+                //删除数据
+                string strDelete = string.Format("delete from WebShell where GUID=\'{0}\'", guid.ToString());
+                sqliteCommand = new SqliteCommand(strDelete, sqliteConnection);
+                sqliteCommand.ExecuteReader();
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                sqliteConnection?.Dispose();
+                sqliteCommand?.Dispose();
+            }
+        }
     }
 }

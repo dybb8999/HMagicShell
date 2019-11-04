@@ -15,7 +15,34 @@
         <CommandBar IsOpen="False" DefaultLabelPosition="Right" Grid.Row="0">
             <AppBarButton Icon="Add" Label="添加" Click="OnAddWebShell" />
         </CommandBar>
-        
-        <GridView Name="shellList" Margin="5" Grid.Row="1" SelectionMode="Single" IsItemClickEnabled="True" ItemTemplate="{StaticResource ShellListItemDataTemplate}" ItemClick="shellList_ItemClick"/>
+
+        <GridView Name="shellList" Margin="5" Grid.Row="1" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="shellList_ItemClick">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+                        <Grid Margin="10" Width="200" Height="100">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{Binding ShellAddress}" Grid.Row="0" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding CreateTime}" HorizontalAlignment="Center" Grid.Row="1"/>
+                        </Grid>
+
+                        <!--菜单-->
+                        <Border.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="文件管理" Click="MenuFlyoutItem_Click" Tag="FileManager"/>
+                                <MenuFlyoutItem Text="远程命令" Click="MenuFlyoutItem_Click" Tag="RemoteShell"/>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Text="编辑" Click="MenuFlyoutItem_Click" Tag="Modify"/>
+                                <MenuFlyoutItem Text="删除" Click="MenuFlyoutItem_Click" Tag="Delete"/>
+                            </MenuFlyout>
+                        </Border.ContextFlyout>
+                    </Border>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>

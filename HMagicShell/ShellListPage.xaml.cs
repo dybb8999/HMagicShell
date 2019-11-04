@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -59,13 +60,44 @@ namespace HMagicShell
             var webshellList = await DataBaseManager.QueryAllWebShell();
             foreach (var item in webshellList)
             {
-                m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView(item.Url, item.CreateTime));
+                m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView(item.Url, item.CreateTime,item.Guid));
             }
         }
 
-        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("Menu Click!");
+            MenuFlyoutItem item = e.OriginalSource as MenuFlyoutItem;
+            if(item == null)
+            {
+                return;
+            }
+
+            switch ((string)item.Tag)
+            {
+                case "FileManager":
+
+                    break;
+
+                case "RemoteShell":
+                    break;
+
+                case "Modify":
+                    break;
+
+                case "Delete":
+                    ModeView.ShellListGridViewModeView pData = item.DataContext as ModeView.ShellListGridViewModeView;
+                    await DeleteWebShell(pData.Guid);
+                    m_pShellListModeView.Remove(pData);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private async Task DeleteWebShell(Guid guid)
+        {
+            await DataBaseManager.DeleteWebShellAsync(guid);
         }
     }
 }
