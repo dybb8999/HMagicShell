@@ -48,8 +48,12 @@ namespace HMagicShell
             {
                 //确定
                 var webShellInfo = dlg.GetWebShellConfig();
+                //设置创建时间
+                webShellInfo.CreateTime = DateTime.Now.ToFileTimeUtc();
+
                 await DataBaseManager.AddWebShellAsync(webShellInfo);
-                RefreshWebShell();
+                ModeView.ShellListGridViewModeView webShellItem = new ModeView.ShellListGridViewModeView(webShellInfo.Url, webShellInfo.CreateTime, webShellInfo);
+                m_pShellListModeView.Add(webShellItem);
             }
         }
 

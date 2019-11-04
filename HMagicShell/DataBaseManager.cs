@@ -104,7 +104,7 @@ namespace HMagicShell
 
                 //插入数据
                 string strInsert = string.Format("insert into WebShell(GUID,URL,PASSWORD,TYPE,REMARK,ENCODING,CREATETIME) VALUES (\'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\',\'{5}\',{6})",
-                    info.Guid.ToString(), info.Url, info.Password, info.Type.ToString(), info.Remark, info.Encoding, DateTime.Now.ToFileTimeUtc());
+                    info.Guid.ToString(), info.Url, info.Password, info.Type.ToString(), info.Remark, info.Encoding, info.CreateTime);
                 sqliteCommand = new SqliteCommand(strInsert, sqliteConnection);
                 sqliteCommand.ExecuteReader();
 
@@ -129,7 +129,7 @@ namespace HMagicShell
             try
             {
                 sqliteConnection = new SqliteConnection(string.Format("Filename={0}", strDatabasePath));
-                sqliteConnection.Open();
+                await sqliteConnection.OpenAsync();
 
                 //删除数据
                 string strDelete = string.Format("delete from WebShell where GUID=\'{0}\'", guid.ToString());
@@ -157,7 +157,7 @@ namespace HMagicShell
             try
             {
                 sqliteConnection = new SqliteConnection(string.Format("Filename={0}", strDatabasePath));
-                sqliteConnection.Open();
+                await sqliteConnection.OpenAsync();
 
                 //插入数据
                 string strInsert = string.Format("update WebShell set URL=\'{0}\',PASSWORD=\'{1}\',TYPE=\'{2}\',REMARK=\'{3}\',ENCODING=\'{4}\' where GUID=\'{5}\'",
