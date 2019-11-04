@@ -37,7 +37,7 @@ namespace HMagicShell
         private void shellList_ItemClick(object sender, ItemClickEventArgs e)
         {
             var clickItem = e.ClickedItem as ModeView.ShellListGridViewModeView;
-            this.Frame.Navigate(typeof(ControlPage), "asdfasf", new DrillInNavigationTransitionInfo());
+            this.Frame.Navigate(typeof(ControlPage), clickItem.BaseInfo, new DrillInNavigationTransitionInfo());
         }
 
         private async void OnAddWebShell(object sender, RoutedEventArgs e)
@@ -60,7 +60,7 @@ namespace HMagicShell
             var webshellList = await DataBaseManager.QueryAllWebShell();
             foreach (var item in webshellList)
             {
-                m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView(item.Url, item.CreateTime,item.Guid));
+                m_pShellListModeView.Add(new ModeView.ShellListGridViewModeView(item.Url, item.CreateTime, item));
             }
         }
 
@@ -72,22 +72,24 @@ namespace HMagicShell
                 return;
             }
 
+            ModeView.ShellListGridViewModeView pData = item.DataContext as ModeView.ShellListGridViewModeView;
+
             switch ((string)item.Tag)
             {
                 case "FileManager":
-
+                    this.Frame.Navigate(typeof(ControlPage), pData.BaseInfo, new DrillInNavigationTransitionInfo());
                     break;
 
                 case "RemoteShell":
+
                     break;
 
                 case "Modify":
+                    await ModifyWebShell(pData.BaseInfo);
                     break;
 
                 case "Delete":
-                    ModeView.ShellListGridViewModeView pData = item.DataContext as ModeView.ShellListGridViewModeView;
-                    await DeleteWebShell(pData.Guid);
-                    m_pShellListModeView.Remove(pData);
+                    await DeleteWebShell(pData.BaseInfo);
                     break;
 
                 default:
@@ -95,9 +97,30 @@ namespace HMagicShell
             }
         }
 
-        private async Task DeleteWebShell(Guid guid)
+        private async Task DeleteWebShell(CWebShellInfo info)
         {
-            await DataBaseManager.DeleteWebShellAsync(guid);
+            await DataBaseManager.DeleteWebShellAsync(info.Guid);
+            var deleteItem = (from item in m_pShellListModeView where item.Guid == info.Guid select item).FirstOrDefault();
+            m_pShellListModeView.Remove(deleteItem);
+        }
+
+        private async Task ModifyWebShell(CWebShellInfo info)
+        {
+            WebShellConfigDialog dlg = new WebShellConfigDialog();
+            dlg.SetWebShellConfig(info);
+            var result = await dlg.ShowAsync();
+            if(result == ContentDialogResult.Primary)
+            {
+                info = dlg.GetWebShellConfig();
+                //更新数据库
+                await DataBaseManager.ModifyWebShellAsync(info);
+
+                //更新界面数据
+                var modifyItem = (from item in m_pShellListModeView where item.Guid == info.Guid select item).FirstOrDefault();
+                modifyItem.SetFromData(info);
+            }
+
+            //RefreshWebShell();
         }
     }
 }

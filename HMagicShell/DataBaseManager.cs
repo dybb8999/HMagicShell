@@ -147,5 +147,33 @@ namespace HMagicShell
                 sqliteCommand?.Dispose();
             }
         }
+
+        public static async Task ModifyWebShellAsync(CWebShellInfo info)
+        {
+            SqliteConnection sqliteConnection = null;
+            SqliteCommand sqliteCommand = null;
+            string strDatabasePath = ApplicationData.Current.LocalFolder.Path + "\\" + m_DatabasePath + "\\" + m_DatabaseFile;
+
+            try
+            {
+                sqliteConnection = new SqliteConnection(string.Format("Filename={0}", strDatabasePath));
+                sqliteConnection.Open();
+
+                //插入数据
+                string strInsert = string.Format("update WebShell set URL=\'{0}\',PASSWORD=\'{1}\',TYPE=\'{2}\',REMARK=\'{3}\',ENCODING=\'{4}\' where GUID=\'{5}\'",
+                    info.Url, info.Password, info.Type.ToString(), info.Remark, info.Encoding, info.Guid.ToString());
+                sqliteCommand = new SqliteCommand(strInsert, sqliteConnection);
+                sqliteCommand.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                sqliteConnection?.Dispose();
+                sqliteCommand?.Dispose();
+            }
+        }
     }
 }

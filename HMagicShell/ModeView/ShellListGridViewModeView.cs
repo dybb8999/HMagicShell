@@ -14,24 +14,30 @@ namespace HMagicShell.ModeView
         private string m_strShellAddress = "";
         private DateTime m_dateCreateTime = DateTime.Now;
         private string m_strPassWord = "";
-        private Guid m_guid;
+        public CWebShellInfo BaseInfo { get; set; }
 
         public ShellListGridViewModeView()
         {
 
         }
 
-        public ShellListGridViewModeView(string address, Int64 dateTime, Guid guid)
+        public ShellListGridViewModeView(string address, Int64 dateTime, CWebShellInfo info)
         {
             m_strShellAddress = address;
             m_dateCreateTime = DateTime.FromFileTimeUtc(dateTime).ToLocalTime();
-            m_guid = guid;
+            BaseInfo = info;
+        }
+
+        public void SetFromData(CWebShellInfo info)
+        {
+            BaseInfo = info;
+            ShellAddress = info.Url;
+            PassWord = info.Password;
         }
 
         public Guid Guid
         {
-            get => m_guid;
-            set => m_guid = value;
+            get => BaseInfo.Guid;
         }
         public string ShellAddress
         {

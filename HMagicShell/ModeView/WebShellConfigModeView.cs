@@ -40,11 +40,22 @@ namespace HMagicShell.ModeView
         public void SetInfo(CWebShellInfo info)
         {
             m_strUrl = info.Url;
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Url)));
+
             m_strPassword = info.Password;
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Password)));
+
             m_strRemark = info.Remark;
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Remark)));
+
             m_guid = info.Guid;
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Guid)));
+
             m_uType = info.Type;
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Type)));
+
             m_strEncoding = info.Encoding;
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Encoding)));
         }
 
         public string Url
