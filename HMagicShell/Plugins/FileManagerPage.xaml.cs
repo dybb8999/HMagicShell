@@ -1,8 +1,13 @@
-﻿using System;
+﻿using HMagicShell.EncryptAndDecode;
+using HMagicShell.ShellType;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,15 +30,13 @@ namespace HMagicShell.Plugins
         //保存WebShell配置信息
         private CWebShellInfo m_pWebShellInfo;
         //拿到PHP5 PHP7 or Ajax处理操作
-
+        private IWebShellControl m_pShellControl;
         //处理编码信息
-        
 
         private ModeView.FileManagerPageModeView m_pModeview = new ModeView.FileManagerPageModeView();
         public FileManagerPage()
         {
             this.InitializeComponent();
-
             mainGrid.DataContext = m_pModeview;
         }
 
@@ -42,15 +45,21 @@ namespace HMagicShell.Plugins
 
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            
+            m_pWebShellInfo = e.Content as CWebShellInfo;
+            m_pShellControl = WebShellControlFactory.Create(m_pWebShellInfo.Type);
+            m_pShellControl.SetInfo(m_pWebShellInfo.Url, m_pWebShellInfo.Password, Encoding.GetEncoding(m_pWebShellInfo.Encoding), CShellTransmissionEncryptAndDecryptFactory.Create(""));
+            await QueryVolumes();
             base.OnNavigatedTo(e);
         }
 
-        private void QueryVolumes()
+        private async Task QueryVolumes()
         {
-
+            string jsonData = await m_pShellControl.GetAllVolumes();
+            var jsonObj = JObject.Parse(jsonData);
+            var diskList = jsonObj["DiskList"];
         }
     }
 }
