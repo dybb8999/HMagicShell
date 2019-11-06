@@ -40,19 +40,17 @@ namespace HMagicShell.Plugins
             mainGrid.DataContext = m_pModeview;
         }
 
-        private void ListViewHeaderReleased(object sender, PointerRoutedEventArgs e)
+        public async Task SetInfo(CWebShellInfo info)
         {
-
-        }
-
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
-            m_pWebShellInfo = e.Content as CWebShellInfo;
+            m_pWebShellInfo = info;
             m_pShellControl = WebShellControlFactory.Create(m_pWebShellInfo.Type);
             m_pShellControl.SetInfo(m_pWebShellInfo.Url, m_pWebShellInfo.Password, Encoding.GetEncoding(m_pWebShellInfo.Encoding), CShellTransmissionEncryptAndDecryptFactory.Create(""));
             await QueryVolumes();
-            base.OnNavigatedTo(e);
+        }
+
+        private void ListViewHeaderReleased(object sender, PointerRoutedEventArgs e)
+        {
+
         }
 
         private async Task QueryVolumes()
@@ -60,6 +58,7 @@ namespace HMagicShell.Plugins
             string jsonData = await m_pShellControl.GetAllVolumes();
             var jsonObj = JObject.Parse(jsonData);
             var diskList = jsonObj["DiskList"];
+            
         }
     }
 }

@@ -9,5 +9,5 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <muxc:TabView Name="tabView" IsAddTabButtonVisible="False" CanDragTabs="True"/>
+    <muxc:TabView Name="tabView" IsAddTabButtonVisible="False" CanDragTabs="True" TabCloseRequested="tabView_TabCloseRequested"/>
 </Page>

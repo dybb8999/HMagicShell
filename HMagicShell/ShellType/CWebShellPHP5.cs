@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -28,7 +29,8 @@ namespace HMagicShell.ShellType
             {
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = await client.PostAsync(Address, new FormUrlEncodedContent(kvp));
-                if(response.EnsureSuccessStatusCode().StatusCode == System.Net.HttpStatusCode.OK)
+                //HttpResponseMessage response = await client.GetAsync("http://220.181.38.150");
+                if (response.EnsureSuccessStatusCode().StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var responseData = await response.Content.ReadAsByteArrayAsync();
                     strRet = Encoding.GetString(responseData);

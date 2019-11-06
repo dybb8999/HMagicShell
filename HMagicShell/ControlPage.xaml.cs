@@ -48,7 +48,8 @@ namespace HMagicShell
                 return;
             }
 
-            tabView.TabItems.Add(CreateNewTab(1));
+            var info = e.Parameter as CPluginCreateInfo;
+            tabView.TabItems.Add(CreateNewTab(info.WebShellInfo, info.Plugin));
             base.OnNavigatedTo(e);
         }
 
@@ -64,17 +65,36 @@ namespace HMagicShell
             base.OnNavigatingFrom(e);
         }
 
-        private TabViewItem CreateNewTab(int index)
+        private TabViewItem CreateNewTab(CWebShellInfo info, string Plugin)
         {
             TabViewItem newItem = new TabViewItem();
+            newItem.Header = info.Url;
 
-            newItem.Header = "sdfsdf";
-            newItem.IconSource = new Microsoft.UI.Xaml.Controls.SymbolIconSource() { Symbol = Symbol.Document };
+            switch(Plugin)
+            {
+                case "FileManager":
+                    newItem.IconSource = new Microsoft.UI.Xaml.Controls.SymbolIconSource() { Symbol = Symbol.Folder };
+                    var page = new Plugins.FileManagerPage();
+                    page.SetInfo(info).ConfigureAwait(false);
+                    newItem.Content = page;
+                    break;
+
+                case "RemoteShell":
+                    newItem.IconSource = new Microsoft.UI.Xaml.Controls.SymbolIconSource() { Symbol = Symbol.PostUpdate };
+                    newItem.Content = new Plugins.TerminalPage();
+                    break;
+            }
+            
 
             // The content of the tab is often a frame that contains a page, though it could be any UIElement.
 
-            newItem.Content = new Plugins.FileManagerPage();
+            
             return newItem;
+        }
+
+        private void tabView_TabCloseRequested(TabView sender, TabViewTabCloseRequestedEventArgs args)
+        {
+            sender.TabItems.Remove(args.Tab);
         }
     }
 }

@@ -37,7 +37,11 @@ namespace HMagicShell
         private void shellList_ItemClick(object sender, ItemClickEventArgs e)
         {
             var clickItem = e.ClickedItem as ModeView.ShellListGridViewModeView;
-            this.Frame.Navigate(typeof(ControlPage), clickItem.BaseInfo, new DrillInNavigationTransitionInfo());
+            var info = new CPluginCreateInfo();
+            info.WebShellInfo = clickItem.BaseInfo;
+            //点击默认打开文件管理器
+            info.Plugin = "FileManager";
+            this.Frame.Navigate(typeof(ControlPage), info, new DrillInNavigationTransitionInfo());
         }
 
         private async void OnAddWebShell(object sender, RoutedEventArgs e)
@@ -77,15 +81,14 @@ namespace HMagicShell
             }
 
             ModeView.ShellListGridViewModeView pData = item.DataContext as ModeView.ShellListGridViewModeView;
-
+            var info = new CPluginCreateInfo();
+            info.WebShellInfo = pData.BaseInfo;
+            info.Plugin = (string)item.Tag;
             switch ((string)item.Tag)
             {
                 case "FileManager":
-                    this.Frame.Navigate(typeof(ControlPage), pData.BaseInfo, new DrillInNavigationTransitionInfo());
-                    break;
-
                 case "RemoteShell":
-
+                    this.Frame.Navigate(typeof(ControlPage), info, new DrillInNavigationTransitionInfo());
                     break;
 
                 case "Modify":
