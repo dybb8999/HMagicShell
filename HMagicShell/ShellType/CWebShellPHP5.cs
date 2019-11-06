@@ -25,20 +25,13 @@ namespace HMagicShell.ShellType
                 new KeyValuePair<string, string>(Password, strCode)
             };
 
-            try
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PostAsync(Address, new FormUrlEncodedContent(kvp));
+            //HttpResponseMessage response = await client.GetAsync("http://220.181.38.150");
+            if (response.EnsureSuccessStatusCode().StatusCode == System.Net.HttpStatusCode.OK)
             {
-                HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.PostAsync(Address, new FormUrlEncodedContent(kvp));
-                //HttpResponseMessage response = await client.GetAsync("http://220.181.38.150");
-                if (response.EnsureSuccessStatusCode().StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    var responseData = await response.Content.ReadAsByteArrayAsync();
-                    strRet = Encoding.GetString(responseData);
-                }
-            }
-            catch (Exception e)
-            {
-                throw;
+                var responseData = await response.Content.ReadAsByteArrayAsync();
+                strRet = Encoding.GetString(responseData);
             }
             return strRet;
         }

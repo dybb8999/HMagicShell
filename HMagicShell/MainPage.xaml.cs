@@ -34,7 +34,6 @@ namespace HMagicShell
             {
                 item.IsSelected = true;
             }
-            
         }
 
         private void navigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

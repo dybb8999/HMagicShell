@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -45,7 +46,15 @@ namespace HMagicShell.Plugins
             m_pWebShellInfo = info;
             m_pShellControl = WebShellControlFactory.Create(m_pWebShellInfo.Type);
             m_pShellControl.SetInfo(m_pWebShellInfo.Url, m_pWebShellInfo.Password, Encoding.GetEncoding(m_pWebShellInfo.Encoding), CShellTransmissionEncryptAndDecryptFactory.Create(""));
-            await QueryVolumes();
+            try
+            {
+                await QueryVolumes();
+            }
+            catch(Exception e)
+            {
+                await new MessageDialog(e.Message).ShowAsync();
+            }
+            
         }
 
         private void ListViewHeaderReleased(object sender, PointerRoutedEventArgs e)
