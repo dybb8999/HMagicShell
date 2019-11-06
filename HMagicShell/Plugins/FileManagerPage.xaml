@@ -25,7 +25,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <TreeView Name="folderTreeView" VerticalAlignment="Stretch" Grid.Column="0" ItemsSource="{Binding FolderData}" ItemTemplate="{StaticResource FolderTreeTemplete}"/>
+        <TreeView Name="folderTreeView" VerticalAlignment="Stretch" Grid.Column="0" ItemsSource="{Binding FolderData}" ItemTemplate="{StaticResource FolderTreeTemplete}" ItemInvoked="folderTreeView_ItemInvoked"/>
 
         <ListView Name="fileListView" VerticalAlignment="Stretch" Grid.Column="1" ItemsSource="{Binding FileData}" ItemContainerStyle="{StaticResource FileManagerPageListViewItemStyle}">
             <ListView.Header>

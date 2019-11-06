@@ -45,7 +45,7 @@ namespace HMagicShell.Plugins
         {
             m_pWebShellInfo = info;
             m_pShellControl = WebShellControlFactory.Create(m_pWebShellInfo.Type);
-            m_pShellControl.SetInfo(m_pWebShellInfo.Url, m_pWebShellInfo.Password, Encoding.GetEncoding(m_pWebShellInfo.Encoding), CShellTransmissionEncryptAndDecryptFactory.Create(""));
+            m_pShellControl.SetInfo(m_pWebShellInfo.Url, m_pWebShellInfo.Password, Encoding.GetEncoding(m_pWebShellInfo.Encoding), CShellTransmissionEncryptAndDecryptFactory.Create("base64"));
             try
             {
                 await QueryVolumes();
@@ -67,7 +67,72 @@ namespace HMagicShell.Plugins
             string jsonData = await m_pShellControl.GetAllVolumes();
             var jsonObj = JObject.Parse(jsonData);
             var diskList = jsonObj["DiskList"];
-            
+            //解析json然后同步数据
+            var diskArray = diskList.ToArray();
+            foreach (var item in diskArray)
+            {
+                m_pModeview.FolderData.Add(new ModeView.FolderTreeViewItem(item.ToString(), item.ToString()));
+            }
+
+            var strBasePath = jsonObj["BaseDir"];
+            var subPath = strBasePath.ToString().Split('\\');
+            var treeData = m_pModeview.FolderData;
+            var strFullPath = "";
+            foreach (var subItem in subPath)
+            {
+                bool bFind = false;
+                foreach(var treeItem in treeData)
+                {
+                    if(subItem.CompareTo(treeItem.Path) == 0)
+                    {
+                        treeData = treeItem.SubFolder;
+                        bFind = true;
+                        break;
+                    }
+                }
+
+                if(strFullPath.CompareTo("") != 0)
+                {
+                    strFullPath += "\\";
+                }
+                strFullPath += subItem;
+
+                if(bFind == false)
+                {
+                    //没有这一项，添加
+                    var newFolder = new ModeView.FolderTreeViewItem(subItem, strFullPath);
+                    treeData.Add(newFolder);
+                    treeData = newFolder.SubFolder;             
+                }
+            }
+        }
+
+        private async void folderTreeView_ItemInvoked(TreeView sender, TreeViewItemInvokedEventArgs args)
+        {
+            var clickItem = args.InvokedItem as ModeView.FolderTreeViewItem;
+            string strQueryPath = clickItem.FullPath + "\\";
+            string jsonData = await m_pShellControl.GetFolderAndFiles(strQueryPath);
+            var jsonObj = JObject.Parse(jsonData);
+            //文件夹列表添加
+            var folderList = jsonObj["folders"];
+            foreach (var folderItem in folderList)
+            {
+                var findItem = from targeItem in clickItem.SubFolder where targeItem.Path == folderItem.ToString() select folderItem;
+                if(findItem.Count() != 0)
+                {
+                    continue;
+                }
+
+                clickItem.SubFolder.Add(new ModeView.FolderTreeViewItem(folderItem.ToString(), clickItem.FullPath + "\\" + folderItem.ToString()));
+            }
+
+            //文件列表添加
+            m_pModeview.FileData.Clear();
+            var fileList = jsonObj["files"];
+            foreach(var fileItem in fileList)
+            {
+                m_pModeview.FileData.Add(new ModeView.FileInfoItem(fileItem.ToString()));
+            }
         }
     }
 }

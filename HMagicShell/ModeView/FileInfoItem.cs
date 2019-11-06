@@ -24,6 +24,11 @@ namespace HMagicShell.ModeView
             m_uSize = 1024;
         }
 
+        public FileInfoItem(string name)
+        {
+            m_strName = name;
+        }
+
         public string Name
         {
             get => m_strName;

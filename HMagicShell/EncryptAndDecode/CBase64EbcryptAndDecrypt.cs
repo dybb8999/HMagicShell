@@ -13,9 +13,10 @@ namespace HMagicShell.EncryptAndDecode
             throw new NotImplementedException();
         }
 
-        public string Encrypt(string data)
+        public string Encrypt(string data, Encoding encoding)
         {
-            throw new NotImplementedException();
+            var byteData = encoding.GetBytes(data);
+            return Convert.ToBase64String(byteData);
         }
     }
 }

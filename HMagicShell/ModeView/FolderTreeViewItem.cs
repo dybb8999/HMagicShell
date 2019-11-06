@@ -14,16 +14,17 @@ namespace HMagicShell.ModeView
 
         private ObservableCollection<FolderTreeViewItem> m_collectionSubFolder = new ObservableCollection<FolderTreeViewItem>();
         private string m_strPath;
-        
+        public string FullPath { get; set; }
 
         public FolderTreeViewItem()
         {
 
         }
 
-        public FolderTreeViewItem(string str)
+        public FolderTreeViewItem(string str, string strFullPath)
         {
             m_strPath = str;
+            FullPath = strFullPath;
         }
 
         public ObservableCollection<FolderTreeViewItem> SubFolder

@@ -11,6 +11,8 @@ namespace HMagicShell.ShellType
     {
         public void SetInfo(string address, string password, Encoding encoding, IShellTransmissionEncryptAndDecrypt itead);
         public Task<string> GetAllVolumes();
+
+        public Task<string> GetFolderAndFiles(string strPath);
     }
 
     class WebShellControlFactory

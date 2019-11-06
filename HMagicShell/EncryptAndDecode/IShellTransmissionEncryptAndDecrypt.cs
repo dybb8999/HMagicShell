@@ -9,7 +9,7 @@ namespace HMagicShell.EncryptAndDecode
     public interface IShellTransmissionEncryptAndDecrypt
     {
         //将代码通过一定方式加密后发送到远程shell
-        public string Encrypt(string data);
+        public string Encrypt(string data, Encoding encoding);
         //将代码返回的数据进行解密
         public string Decode(string data);
     }
