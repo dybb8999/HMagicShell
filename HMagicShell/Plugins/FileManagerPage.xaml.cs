@@ -113,25 +113,31 @@ namespace HMagicShell.Plugins
             string strQueryPath = clickItem.FullPath + "\\";
             string jsonData = await m_pShellControl.GetFolderAndFiles(strQueryPath);
             var jsonObj = JObject.Parse(jsonData);
+
+            //清除文件列表内容
+            m_pModeview.FileData.Clear();
             //文件夹列表添加
             var folderList = jsonObj["folders"];
             foreach (var folderItem in folderList)
             {
-                var findItem = from targeItem in clickItem.SubFolder where targeItem.Path == folderItem.ToString() select folderItem;
+                var findItem = from targeItem in clickItem.SubFolder where targeItem.Path == folderItem["Name"].ToString() select folderItem;
                 if(findItem.Count() != 0)
                 {
                     continue;
                 }
 
-                clickItem.SubFolder.Add(new ModeView.FolderTreeViewItem(folderItem.ToString(), clickItem.FullPath + "\\" + folderItem.ToString()));
+                clickItem.SubFolder.Add(new ModeView.FolderTreeViewItem((string)folderItem["Name"], clickItem.FullPath + "\\" + (string)folderItem["Name"]));
+
+                //文件列表添加
+                m_pModeview.FileData.Add(new ModeView.FileInfoItem((string)folderItem["Name"], "文件夹", (long)folderItem["LastModifyTime"], (long)folderItem["Size"]));
             }
 
             //文件列表添加
-            m_pModeview.FileData.Clear();
+            
             var fileList = jsonObj["files"];
             foreach(var fileItem in fileList)
             {
-                m_pModeview.FileData.Add(new ModeView.FileInfoItem(fileItem.ToString()));
+                m_pModeview.FileData.Add(new ModeView.FileInfoItem((string)fileItem["Name"], "文件", (long)fileItem["LastModifyTime"], (long)fileItem["Size"]));
             }
         }
     }

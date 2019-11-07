@@ -5,10 +5,12 @@
     xmlns:local="using:HMagicShell.Plugins"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ValueConvert="using:HMagicShell.ValueConvert"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
     <Page.Resources>
+        <ValueConvert:FileSizeValueConvert x:Name="FileSizeValueConvert"/>
         <DataTemplate x:Key="FolderTreeTemplete">
             <TreeViewItem AutomationProperties.Name="{Binding Path}"
                 ItemsSource="{Binding SubFolder}" IsExpanded="True">
@@ -61,10 +63,11 @@
                             <!--大小-->
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
+                        
                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Grid.Column="0" Margin="12,0,0,0"/>
                         <TextBlock Text="{Binding LastChangeTime}" VerticalAlignment="Center" Grid.Column="1" Margin="12,0,0,0"/>
                         <TextBlock Text="{Binding Type}" VerticalAlignment="Center" Grid.Column="2" Margin="12,0,0,0"/>
-                        <TextBlock Text="{Binding Size}" VerticalAlignment="Center" Grid.Column="3" Margin="12,0,0,0"/>
+                        <TextBlock Text="{Binding Size, Converter={StaticResource FileSizeValueConvert}}" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="3" Margin="12,0,5,0"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

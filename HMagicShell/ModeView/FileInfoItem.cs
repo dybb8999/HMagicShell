@@ -14,7 +14,7 @@ namespace HMagicShell.ModeView
         private string m_strName;
         private DateTime m_dateLastChangeTime;
         private string m_strType;
-        private uint m_uSize;
+        private long m_uSize;
 
         public FileInfoItem()
         {
@@ -24,9 +24,12 @@ namespace HMagicShell.ModeView
             m_uSize = 1024;
         }
 
-        public FileInfoItem(string name)
+        public FileInfoItem(string name, string strType, long lastModifyTime, long size)
         {
             m_strName = name;
+            m_dateLastChangeTime = new DateTime(621355968000000000 + (long)lastModifyTime * (long)10000000, DateTimeKind.Utc);
+            m_uSize = size;
+            m_strType = strType;
         }
 
         public string Name
@@ -60,7 +63,7 @@ namespace HMagicShell.ModeView
             }
         }
 
-        public uint Size
+        public long Size
         {
             get => m_uSize;
             set

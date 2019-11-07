@@ -47,7 +47,7 @@ namespace HMagicShell.ShellType
         public async Task<string> GetFolderAndFiles(string strPath)
         {
             string strRet = "";
-            string strCode = @"$a='" + strPath + @"\';$b=array();$c=array();if(is_dir($a)){if($d=opendir($a)){while(($e=readdir($d))!==false){if($e=='.'||$e=='..'){}else if(is_dir($a.$e)==TRUE){array_push($b,$e);}else if(is_file($a.$e)==TRUE){array_push($c,$e);}}closedir($d);}}$f=array('folders'=>$b,'files'=>$c);echo json_encode($f);";
+            string strCode = @"$a='" + strPath + @"\';$b=array();$c=array();if(is_dir($a)){if($d=opendir($a)){while(($e=readdir($d))!==false){if($e=='.'||$e=='..'){}else if(is_dir($a.$e)==TRUE){$f=filesize($a.$e);$g=filemtime($a.$e);$h=array('Name'=>$e,'Size'=>$f,'LastModifyTime'=>$g);array_push($b,$h);}else if(is_file($a.$e)==TRUE){$f=filesize($a.$e);$g=filemtime($a.$e);$h=array('Name'=>$e,'Size'=>$f,'LastModifyTime'=>$g);array_push($c,$h);}}closedir($d);}}$i=array('folders'=>$b,'files'=>$c);echo json_encode($i);";
             string strData = EncryptAndDecrypt.Encrypt(strCode, Encoding);
             var kvp = new List<KeyValuePair<string, string>>
             {
