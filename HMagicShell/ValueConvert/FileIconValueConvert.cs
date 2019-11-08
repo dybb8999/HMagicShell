@@ -22,7 +22,7 @@ namespace HMagicShell.ValueConvert
                     break;
 
                 case "文件":
-                    source = new BitmapImage(new Uri("ms-appx:///Assets/folder.png"));
+                    source = new BitmapImage(new Uri("ms-appx:///Assets/FileTypeIcon/default.png"));
                     break;
             }
             return source;
