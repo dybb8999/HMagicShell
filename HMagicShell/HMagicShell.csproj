@@ -133,6 +133,7 @@
     <Compile Include="ModeView\WebShellConfigModeView.cs" />
     <Compile Include="ShellType\CWebShellPHP5.cs" />
     <Compile Include="ShellType\IWebShellControl.cs" />
+    <Compile Include="ValueConvert\FileIconValueConvert.cs" />
     <Compile Include="ValueConvert\FileSizeValueConvert.cs" />
     <Compile Include="WebShellConfigDialog.xaml.cs">
       <DependentUpon>WebShellConfigDialog.xaml</DependentUpon>

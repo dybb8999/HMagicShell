@@ -14,6 +14,19 @@ namespace HMagicShell.ModeView
 
         private ObservableCollection<FolderTreeViewItem> m_pFolderCollect = new ObservableCollection<FolderTreeViewItem>();
         private ObservableCollection<FileInfoItem> m_pFileCollect = new ObservableCollection<FileInfoItem>();
+        private string m_strFullPath;
+
+        public string FullPath
+        {
+            get => m_strFullPath;
+            set
+            {
+                m_strFullPath = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FullPath"));
+            }
+        }
+
+
         public ObservableCollection<FolderTreeViewItem> FolderData
         {
             get => m_pFolderCollect;
