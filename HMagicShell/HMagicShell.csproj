@@ -171,6 +171,18 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\FileTypeIcon\cpp.png" />
+    <Content Include="Assets\FileTypeIcon\dll.png" />
+    <Content Include="Assets\FileTypeIcon\excel.png" />
+    <Content Include="Assets\FileTypeIcon\exe.png" />
+    <Content Include="Assets\FileTypeIcon\ini.png" />
+    <Content Include="Assets\FileTypeIcon\js.png" />
+    <Content Include="Assets\FileTypeIcon\music.png" />
+    <Content Include="Assets\FileTypeIcon\pdf.png" />
+    <Content Include="Assets\FileTypeIcon\php.png" />
+    <Content Include="Assets\FileTypeIcon\ppt.png" />
+    <Content Include="Assets\FileTypeIcon\rtf.png" />
+    <Content Include="Assets\FileTypeIcon\word.png" />
     <Content Include="Assets\folder.png" />
     <Content Include="Assets\FileTypeIcon\default.png" />
     <Content Include="Properties\Default.rd.xml" />

@@ -152,7 +152,18 @@ namespace HMagicShell.Plugins
             var fileList = jsonObj["files"];
             foreach (var fileItem in fileList)
             {
-                m_pModeview.FileData.Add(new ModeView.FileInfoItem((string)fileItem["Name"], "文件", (long)fileItem["LastModifyTime"], (long)fileItem["Size"]));
+                var strType = "文件";
+                string strFileName = (string)fileItem["Name"];
+                if(strFileName != null)
+                {
+                    var nameSplit = strFileName.Split('.');
+                    if (nameSplit.Length > 1)
+                    {
+                        strType = nameSplit[nameSplit.Length - 1];
+                    }
+                }
+                
+                m_pModeview.FileData.Add(new ModeView.FileInfoItem((string)fileItem["Name"], strType, (long)fileItem["LastModifyTime"], (long)fileItem["Size"]));
             }
         }
     }
